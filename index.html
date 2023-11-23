@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-segmentation"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation"></script> 
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.158.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.158.0/examples/jsm/"
+      }
+    }
+  </script>
+
+  <script type="module" src="./threejs.js"></script>
+  <script type="module" src="./main.js"></script>
+</head>
+
+<body>
+  <section>
+    <button id="start-button">Start Web Camera</button>
+    <input type="file" id="file-input">Load Local File</button>
+  </section>
+
+  <section class="output-section">
+
+    <div class="outputs-left">
+      <div class="output">
+        <p>Web Cam</p>
+        <div class="output-container">
+          <video id="original-video" width="320" height="240" autoplay muted></video>
+        </div>
+      </div>  
+
+      <div class="output">
+        <p>Mask by segmentaion</p>
+        <div class="output-container">
+          <canvas id='maskoutput' width="320" height="240"></canvas>
+        </div>
+      </div>
+
+      <div class="output">
+        <p>Output 2D</p>
+        <div class="output-container">
+          <canvas id='output2' width="320" height="240"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="outputs-right">
+      <div id="three-container" class="output">
+        <p>Output 3D</p>
+        <div class="output-container">
+          <canvas id='three-canvas' width="320" height="240"></canvas>
+        </div>
+      </div>  
+    </div>
+
+  </section>
+
+</body>
+
+<style>
+  body {
+    margin: 0;
+    padding: 20px;
+  }
+
+  .output-section {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-top: 20px;
+  }
+  .outputs-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-right: 10px;
+  }
+  .output {
+    margin-bottom: 10px;
+  }
+  .output p {
+    font-size: 10px;
+    margin: 0;
+  }
+  .output-container {
+
+  }
+  .output-container canvas, .output-container video  {
+    transform:scaleX(-1);
+    width: 160px;
+    height: 120px;
+    border:solid 1px black;
+  }
+
+  .outputs-right {
+    display: flex;
+    flex-direction: column;
+  }
+  .output-container#three-container {
+    width: 640px;
+    height: 480px;
+  }
+  .output-container#three-container canvas{
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+</style>
+
+</html>
